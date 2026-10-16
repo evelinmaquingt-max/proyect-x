@@ -223,4 +223,4 @@ C:\Users\jonat\ControlViveres\ControlViveresApp\bin\Debug\net10.0\runtimes\win-x
 C:\Users\jonat\ControlViveres\ControlViveresApp\bin\Debug\net10.0\runtimes\win-x64\native\qpdf.dll
 C:\Users\jonat\ControlViveres\ControlViveresApp\bin\Debug\net10.0\runtimes\win-x86\native\QuestPdfSkia.dll
 C:\Users\jonat\ControlViveres\ControlViveresApp\bin\Debug\net10.0\runtimes\win-x86\native\qpdf.dll
-C:\Users\jonat\ControlViveres\ControlViveresApp\obj\Debug\net10.0\compressed\midj3yh2n1-{0}-higfshilly-higfshilly.gz
+C:\Users\jonat\ControlViveres\ControlViveresApp\obj\Debug\net10.0\compressed\midj3yh2n1-{0}-m84bxecbdw-m84bxecbdw.gz

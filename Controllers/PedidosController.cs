@@ -101,6 +101,13 @@ namespace ControlViveresApp.Controllers
             var pedido = await _contexto.Pedidos.FindAsync(id);
             if (pedido is null) return NotFound();
 
+            if (pedido.Estado == EstadoPedido.Recibido)
+            {
+                TempData["Mensaje"] = "Ese pedido ya fue recibido: no se puede editar, solo consultar su comprobante";
+                TempData["Tipo"] = "info";
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(pedido);
         }
 
@@ -123,6 +130,13 @@ namespace ControlViveresApp.Controllers
 
             var existente = await _contexto.Pedidos.FindAsync(id);
             if (existente is null) return NotFound();
+
+            if (existente.Estado == EstadoPedido.Recibido)
+            {
+                TempData["Mensaje"] = "Ese pedido ya fue recibido: no se puede editar, solo consultar su comprobante";
+                TempData["Tipo"] = "info";
+                return RedirectToAction(nameof(Index));
+            }
 
             // FechaSolicitud y SolicitadoPor no se tocan: son el historial del pedido.
             existente.Articulo = pedido.Articulo;

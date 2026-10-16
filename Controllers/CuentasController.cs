@@ -9,10 +9,12 @@ namespace ControlViveresApp.Controllers
     public class CuentasController : Controller
     {
         private readonly SignInManager<Usuario> _gestorSesion;
+        private readonly UserManager<Usuario> _gestorUsuarios;
 
-        public CuentasController(SignInManager<Usuario> gestorSesion)
+        public CuentasController(SignInManager<Usuario> gestorSesion, UserManager<Usuario> gestorUsuarios)
         {
             _gestorSesion = gestorSesion;
+            _gestorUsuarios = gestorUsuarios;
         }
 
         [HttpGet]
@@ -66,6 +68,63 @@ namespace ControlViveresApp.Controllers
             {
                 // Mensaje genérico a propósito: no revela si el usuario existe o no.
                 ModelState.AddModelError(string.Empty, "El usuario o la contraseña no son correctos.");
+            }
+
+            return View(modelo);
+        }
+
+        [HttpGet]
+        public IActionResult Registro(string? urlRetorno = null)
+        {
+            // Si ya inició sesión, no tiene sentido mostrarle el formulario otra vez.
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
+
+            ViewData["UrlRetorno"] = urlRetorno;
+            return View(new Registro());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registro(Registro modelo, string? urlRetorno = null)
+        {
+            ViewData["UrlRetorno"] = urlRetorno;
+
+            if (!ModelState.IsValid)
+            {
+                return View(modelo);
+            }
+
+            var usuario = new Usuario
+            {
+                UserName = modelo.NombreUsuario,
+                Email = modelo.Correo,
+                NombreCompleto = modelo.NombreCompleto,
+                EmailConfirmed = true
+            };
+
+            // Las cuentas públicas nacen con el rol "Usuario" (solo lectura); un
+            // administrador puede ascenderlas más adelante si confía en esa persona.
+            var resultado = await _gestorUsuarios.CreateAsync(usuario, modelo.Contrasena);
+
+            if (resultado.Succeeded)
+            {
+                await _gestorUsuarios.AddToRoleAsync(usuario, "Usuario");
+                await _gestorSesion.SignInAsync(usuario, isPersistent: false);
+
+                if (!string.IsNullOrEmpty(urlRetorno) && Url.IsLocalUrl(urlRetorno))
+                {
+                    return Redirect(urlRetorno);
+                }
+
+                return RedirectToAction("Index", "Inicio");
+            }
+
+            foreach (var error in resultado.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
             return View(modelo);

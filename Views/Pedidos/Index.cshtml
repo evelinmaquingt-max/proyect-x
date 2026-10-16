@@ -139,8 +139,10 @@
                                             Comprobante
                                         </a>
                                     }
-
-                                    <a asp-action="Editar" asp-route-id="@item.Id" class="btn-editar">Editar</a>
+                                    else
+                                    {
+                                        <a asp-action="Editar" asp-route-id="@item.Id" class="btn-editar">Editar</a>
+                                    }
 
                                     <form asp-action="Eliminar" asp-route-id="@item.Id" method="post" style="display:inline;">
                                         <button type="button" class="btn-eliminar js-eliminar" data-nombre="@item.Articulo">

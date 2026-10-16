@@ -8,7 +8,14 @@ public class InicioController : Controller
 {
     public IActionResult Index()
     {
-        return View();
+        // Sin sesión: pantalla de bienvenida pública, sin datos reales ni menú.
+        // Con sesión: panel con accesos rápidos a cada sección del sistema.
+        if (User.Identity?.IsAuthenticated != true)
+        {
+            return View("Bienvenida");
+        }
+
+        return View("Panel");
     }
 
     public IActionResult Privacidad()

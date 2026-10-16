@@ -144,55 +144,7 @@ namespace ControlViveresApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // 4. EDITAR (PANTALLA)
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Editar(int? id)
-        {
-            if (id is null) return NotFound();
-
-            var alimento = await _contexto.Alimentos.FindAsync(id);
-            if (alimento is null) return NotFound();
-
-            return View(alimento);
-        }
-
-        // 5. GUARDAR EDICIÓN
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Editar(
-            int id,
-            [Bind("Id,Nombre,Categoria,Cantidad,UnidadMedida,FechaVencimiento")] Alimento alimento)
-        {
-            if (id != alimento.Id) return NotFound();
-
-            ValidarCatalogos(alimento);
-
-            if (!ModelState.IsValid)
-            {
-                return View(alimento);
-            }
-
-            // Se carga el registro real y solo se cambian los campos del formulario.
-            // Así FechaRegistro conserva la fecha en que el alimento entró al inventario.
-            var existente = await _contexto.Alimentos.FindAsync(id);
-            if (existente is null) return NotFound();
-
-            existente.Nombre = alimento.Nombre;
-            existente.Categoria = alimento.Categoria;
-            existente.Cantidad = alimento.Cantidad;
-            existente.UnidadMedida = alimento.UnidadMedida;
-            existente.FechaVencimiento = alimento.FechaVencimiento;
-
-            await _contexto.SaveChangesAsync();
-
-            TempData["Mensaje"] = "Alimento actualizado correctamente";
-            TempData["Tipo"] = "success";
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        // 6. ELIMINAR
+        // 4. ELIMINAR
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

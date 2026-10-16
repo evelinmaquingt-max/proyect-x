@@ -39,10 +39,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxpbWVudG9zXERldGFsbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Alimentos/Editar.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxpbWVudG9zXEVkaXRhci5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Alimentos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWxpbWVudG9zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -57,6 +53,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/jonat/ControlViveres/ControlViveresApp/Views/cuentas/IniciarSesion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY3VlbnRhc1xJbmljaWFyU2VzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jonat/ControlViveres/ControlViveresApp/Views/cuentas/Registro.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcY3VlbnRhc1xSZWdpc3Ryby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jonat/ControlViveres/ControlViveresApp/Views/EntregasProgramadas/Crear.cshtml]
@@ -79,8 +79,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cmVnYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Inicio/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXEluZGV4LmNzaHRtbA==
+[C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Inicio/Bienvenida.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXEJpZW52ZW5pZGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Inicio/Panel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lvXFBhbmVsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/jonat/ControlViveres/ControlViveresApp/Views/Inicio/Privacidad.cshtml]
