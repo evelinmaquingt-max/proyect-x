@@ -181,12 +181,6 @@ namespace ControlViveresApp.Migrations
                     b.Property<DateTime>("FechaRegistro")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<double?>("Latitud")
-                        .HasColumnType("double precision");
-
-                    b.Property<double?>("Longitud")
-                        .HasColumnType("double precision");
-
                     b.Property<string>("Lugar")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -295,14 +289,6 @@ namespace ControlViveresApp.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Departamento")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Destino")
-                        .HasMaxLength(120)
-                        .HasColumnType("character varying(120)");
 
                     b.Property<string>("Estado")
                         .IsRequired()

@@ -11,7 +11,7 @@
 <div class="form-group">
     <label asp-for="Departamento"></label>
     <select asp-for="Departamento" id="selectDepartamento" class="form-control"
-            asp-items="@(new SelectList(Catalogos.NombresDepartamentos))">
+            asp-items="@(new SelectList(Catalogos.Departamentos))">
         <option value="">Seleccione departamento</option>
     </select>
     <span asp-validation-for="Departamento" class="text-danger"></span>

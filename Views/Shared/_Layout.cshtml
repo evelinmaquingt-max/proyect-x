@@ -59,6 +59,16 @@
                     <a asp-controller="Entregas" asp-action="Index" class="sidebar-link @Activo("Entregas")">
                         <i class="bi bi-gift-fill"></i> <span>Donaciones entregadas</span>
                     </a>
+
+                    <p class="sidebar-section sidebar-section-aparte">Análisis</p>
+
+                    <a asp-controller="Visualizacion" asp-action="Index" class="sidebar-link @Activo("Visualizacion")">
+                        <i class="bi bi-bar-chart-line-fill"></i> <span>Visualización</span>
+                    </a>
+
+                    <a asp-controller="Pobreza" asp-action="Index" class="sidebar-link @Activo("Pobreza")">
+                        <i class="bi bi-geo-alt-fill"></i> <span>Pobreza en Guatemala</span>
+                    </a>
                 </nav>
 
                 <div class="sidebar-footer">

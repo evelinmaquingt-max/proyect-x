@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControlViveresApp.Models
@@ -49,14 +48,6 @@ namespace ControlViveresApp.Models
         [StringLength(100, ErrorMessage = "El proveedor no puede pasar de 100 caracteres")]
         [Display(Name = "Proveedor")]
         public string? Proveedor { get; set; }
-
-        [StringLength(120, ErrorMessage = "El destino no puede pasar de 120 caracteres")]
-        [Display(Name = "Destino")]
-        public string? Destino { get; set; }
-
-        [StringLength(50)]
-        [Display(Name = "Departamento")]
-        public string? Departamento { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Se necesita para")]

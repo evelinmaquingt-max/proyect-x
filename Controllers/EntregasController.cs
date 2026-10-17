@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Data;
 using ControlViveresApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -10,8 +8,8 @@ namespace ControlViveresApp.Controllers
 {
     /// <summary>
     /// Historial de solo lectura de los lugares de Guatemala donde ya se entregaron
-    /// víveres. Se alimenta automáticamente al completar una entrega programada
-    /// (ver EntregasProgramadasController). No tiene pantallas de alta/edición.
+    /// víveres. Se llena solo al completar una entrega programada
+    /// (ver EntregasProgramadasController), por eso no tiene pantallas de alta ni edición.
     /// </summary>
     [Authorize]
     public class EntregasController : Controller
@@ -23,7 +21,7 @@ namespace ControlViveresApp.Controllers
             _contexto = contexto;
         }
 
-        // LISTAR LUGARES VISITADOS
+        // LISTAR DONACIONES ENTREGADAS
         public async Task<IActionResult> Index(string? buscar, string? departamento)
         {
             IQueryable<Entrega> consulta = _contexto.Entregas.AsNoTracking().Include(e => e.Detalles);
@@ -57,6 +55,5 @@ namespace ControlViveresApp.Controllers
 
             return View(lista);
         }
-
     }
 }

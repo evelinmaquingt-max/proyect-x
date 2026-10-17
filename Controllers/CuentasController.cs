@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using ControlViveresApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

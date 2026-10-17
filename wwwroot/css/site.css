@@ -1430,3 +1430,378 @@ input, select, textarea, button {
     .sidebar { height: 100vh; overflow-y: auto; }
     .sidebar-logo { padding: 0.9rem 1.25rem; }
 }
+
+/* =========================================================
+   VISUALIZACIÓN Y MAPA DE POBREZA
+   ========================================================= */
+.subtitulo-pagina {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.tarjeta-valor {
+    overflow-wrap: anywhere;
+}
+
+.tarjeta-detalle {
+    margin-top: 0.2rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.grafica-seccion {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 1.75rem 0 0.9rem;
+}
+
+.graficas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.grafica-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.15rem 1.25rem;
+    min-width: 0;
+}
+
+.grafica-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.grafica-nota {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin: 0.2rem 0 1rem;
+}
+
+.grafica-ancha {
+    grid-column: 1 / -1;
+}
+
+.grafica-linea {
+    position: relative;
+    height: 280px;
+}
+
+.grafica-pastel {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.grafica-lienzo {
+    position: relative;
+    flex: 0 0 170px;
+    height: 170px;
+}
+
+.grafica-vacia {
+    flex: none;
+    height: auto;
+}
+
+/* Leyendas: sirven también como tabla de los datos de cada gráfica */
+.leyenda {
+    list-style: none;
+    flex: 1;
+    min-width: 0;
+}
+
+.leyenda li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.32rem 0;
+    font-size: 0.86rem;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+}
+
+.leyenda li:last-child {
+    border-bottom: none;
+}
+
+.leyenda-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.leyenda-nombre {
+    flex: 1;
+    color: var(--text-main);
+}
+
+.leyenda-valor {
+    font-weight: 600;
+}
+
+.leyenda-valor small {
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-left: 0.25rem;
+}
+
+.leyenda-vacia {
+    color: var(--text-muted);
+}
+
+.leyenda-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    margin-top: 1rem;
+    flex: none;
+}
+
+.leyenda-horizontal li {
+    border-bottom: none;
+    padding: 0.1rem 0;
+    font-size: 0.8rem;
+}
+
+.leyenda-horizontal .leyenda-nombre {
+    flex: none;
+    color: var(--text-muted);
+}
+
+/* Mapa de pobreza */
+.mapa-controles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.segmentado {
+    display: inline-flex;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 3px;
+}
+
+.segmentado button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 0.5rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.segmentado button.activo {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.interruptor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    cursor: pointer;
+}
+
+.mapa-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+    gap: 1rem;
+    align-items: start;
+}
+
+.mapa-lateral {
+    display: grid;
+    gap: 1rem;
+}
+
+.mapa-zona {
+    position: relative;
+}
+
+.mapa-lienzo {
+    color: var(--text-muted);
+}
+
+.mapa-lienzo svg {
+    display: block;
+    width: 100%;
+    max-height: 560px;
+}
+
+.mapa-departamento {
+    stroke: var(--bg-card);
+    stroke-width: 0.012;
+    stroke-linejoin: round;
+    cursor: pointer;
+    outline: none;
+    transition: fill 0.25s;
+}
+
+.mapa-departamento.resaltado,
+.mapa-departamento:focus-visible {
+    stroke: var(--text-main);
+    stroke-width: 0.03;
+}
+
+.mapa-departamento.elegido {
+    stroke: #f59e0b;
+    stroke-width: 0.045;
+}
+
+.mapa-punto-entrega {
+    fill: #f59e0b;
+    fill-opacity: 0.85;
+    stroke: var(--bg-dark);
+    stroke-width: 0.012;
+    transition: r 0.3s;
+}
+
+.mapa-tooltip {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+.mapa-tooltip[hidden] {
+    display: none;
+}
+
+#panelDetalle h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+}
+
+#panelDetalle h5 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin: 1rem 0 0.4rem;
+}
+
+.detalle-fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 0;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+}
+
+.detalle-fila span {
+    color: var(--text-muted);
+}
+
+.detalle-ayuda {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.ranking {
+    list-style: none;
+    margin-top: 0.75rem;
+    max-height: 420px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-input) transparent;
+}
+
+.ranking-fila {
+    display: grid;
+    grid-template-columns: 110px 1fr 52px;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.3rem 0.4rem;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.ranking-fila:hover,
+.ranking-fila.elegida {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.ranking-pista {
+    height: 8px;
+    background-color: var(--bg-input);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ranking-barra {
+    display: block;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s, background 0.3s;
+}
+
+.ranking-valor {
+    text-align: right;
+    font-weight: 600;
+}
+
+.fuente-datos {
+    margin-top: 1.25rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+    .mapa-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .graficas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grafica-pastel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .grafica-lienzo {
+        flex: none;
+        height: 190px;
+    }
+
+    .grafica-linea {
+        height: 230px;
+    }
+}
+
+.sidebar-section-aparte {
+    margin-top: 1.25rem;
+}
+
+/* Seis tarjetas de resumen caben en una sola fila en pantallas anchas */
+.tarjetas-seis {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}

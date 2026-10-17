@@ -49,7 +49,7 @@
 
     <form method="get" class="filtros">
         <input type="text" name="buscar" placeholder="Buscar lugar o municipio..." value="@buscarActual" />
-        <select name="departamento" asp-items="@(new SelectList(Catalogos.NombresDepartamentos, departamentoActual))">
+        <select name="departamento" asp-items="@(new SelectList(Catalogos.Departamentos, departamentoActual))">
             <option value="">Todos los departamentos</option>
         </select>
         <select name="estado" asp-items="@(new SelectList(Html.GetEnumSelectList<EstadoEntregaProgramada>(), "Value", "Text", ((int?)estadoActual)?.ToString()))">

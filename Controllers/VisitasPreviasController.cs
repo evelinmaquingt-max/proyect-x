@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Data;
 using ControlViveresApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -295,7 +292,7 @@ namespace ControlViveresApp.Controllers
         private void ValidarUbicacion(VisitaPrevia visita)
         {
             if (!string.IsNullOrWhiteSpace(visita.Departamento) &&
-                Catalogos.BuscarDepartamento(visita.Departamento) is null)
+                !Catalogos.Departamentos.Contains(visita.Departamento))
             {
                 ModelState.AddModelError(nameof(VisitaPrevia.Departamento),
                     "El departamento seleccionado no es de Guatemala");

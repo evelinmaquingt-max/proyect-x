@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Data;
 using ControlViveresApp.Models;
 using ControlViveresApp.Servicios;
@@ -13,7 +9,7 @@ namespace ControlViveresApp.Controllers
 {
     /// <summary>
     /// Entregas programadas hacia lugares por visitar. Al completarlas, se descuenta
-    /// el inventario, se registra el lugar en el historial de "Lugares Visitados"
+    /// el inventario, se registra el lugar en el historial de "Donaciones entregadas"
     /// y se genera un comprobante en PDF.
     /// </summary>
     [Authorize]
@@ -374,7 +370,7 @@ namespace ControlViveresApp.Controllers
         private void ValidarUbicacion(EntregaProgramada entrega)
         {
             if (!string.IsNullOrWhiteSpace(entrega.Departamento) &&
-                Catalogos.BuscarDepartamento(entrega.Departamento) is null)
+                !Catalogos.Departamentos.Contains(entrega.Departamento))
             {
                 ModelState.AddModelError(nameof(EntregaProgramada.Departamento),
                     "El departamento seleccionado no es de Guatemala");

@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using ControlViveresApp.Models;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;

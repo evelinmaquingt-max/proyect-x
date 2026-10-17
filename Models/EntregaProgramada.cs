@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControlViveresApp.Models
@@ -14,7 +12,7 @@ namespace ControlViveresApp.Models
     /// <summary>
     /// Una entrega planeada hacia un lugar por visitar (departamento/municipio).
     /// Al completarla, se descuenta el inventario, se genera un comprobante en PDF
-    /// y se registra el lugar en el historial de "Lugares Visitados".
+    /// y se registra el lugar en el historial de "Donaciones entregadas".
     /// </summary>
     public class EntregaProgramada
     {

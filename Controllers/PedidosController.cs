@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Data;
 using ControlViveresApp.Models;
 using ControlViveresApp.Servicios;
@@ -219,7 +216,7 @@ namespace ControlViveresApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // 8. COMPROBANTE PDF DE RECEPCIÓN
+        // 7. COMPROBANTE PDF DE RECEPCIÓN
         public async Task<IActionResult> ComprobanteRecepcion(int id)
         {
             var pedido = await _contexto.Pedidos.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
@@ -233,7 +230,7 @@ namespace ControlViveresApp.Controllers
             return File(pdf, "application/pdf", $"Recepcion-Pedido-{pedido.Id}.pdf");
         }
 
-        // 7. ELIMINAR
+        // 8. ELIMINAR
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

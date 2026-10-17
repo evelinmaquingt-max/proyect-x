@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Data;
 using ControlViveresApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -61,10 +58,9 @@ namespace ControlViveresApp.Controllers
             return View(listaAlimentos);
         }
 
-        // 1B. PRODUCTOS SEPARADOS: un cuadro por cada producto del inventario, con
-        // todos sus lotes ordenados ascendente por fecha de vencimiento. Se calcula
-        // en vivo desde el inventario, así que siempre queda sincronizado: un producto
-        // nuevo genera su propio cuadro automáticamente.
+        // 2. PRODUCTOS SEPARADOS: un cuadro por cada producto del inventario, con
+        // todos sus lotes ordenados por fecha de vencimiento. Se calcula en vivo,
+        // así que un producto nuevo genera su propio cuadro automáticamente.
         public async Task<IActionResult> ProductosSeparados()
         {
             var alimentos = await _contexto.Alimentos.AsNoTracking().ToListAsync();
@@ -87,7 +83,7 @@ namespace ControlViveresApp.Controllers
             return View(grupos);
         }
 
-        // 1C. DETALLE DE UN PRODUCTO: todos sus lotes, sin filtrar por rango de días
+        // 3. DETALLE DE UN PRODUCTO: todos sus lotes
         public async Task<IActionResult> Detalle(string nombre)
         {
             if (string.IsNullOrWhiteSpace(nombre))
@@ -112,14 +108,14 @@ namespace ControlViveresApp.Controllers
             return View(lotes);
         }
 
-        // 2. CREAR (PANTALLA)
+        // 4. CREAR (PANTALLA)
         [Authorize(Roles = "Admin")]
         public IActionResult Crear()
         {
             return View(new Alimento());
         }
 
-        // 3. GUARDAR NUEVO ALIMENTO
+        // 5. GUARDAR NUEVO ALIMENTO
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -144,7 +140,7 @@ namespace ControlViveresApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // 4. ELIMINAR
+        // 6. ELIMINAR
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

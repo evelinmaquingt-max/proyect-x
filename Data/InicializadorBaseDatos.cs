@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ControlViveresApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -263,13 +259,6 @@ namespace ControlViveresApp.Data
 
         private const int MetaEntregasSembradas = 50;
 
-        /// <summary>
-        /// Siembra el historial de "Donaciones entregadas". Como son entregas que ya
-        /// pasaron y los víveres ya no están en bodega, cada una lleva su propia Entrega
-        /// Programada "Completada" con productos supuestos (no hace falta que existan
-        /// en el inventario actual): eso le da a cada fila su detalle de productos y su
-        /// comprobante en PDF, igual que a las entregas completadas desde la aplicación.
-        /// </summary>
         // Postgres exige Kind=Utc para "timestamp with time zone"; DateOnly.ToDateTime
         // siempre da Kind=Unspecified, así que hay que forzarlo antes de guardar.
         private static DateTime AFechaUtc(DateOnly fecha) =>
@@ -288,61 +277,15 @@ namespace ControlViveresApp.Data
                 .ToList();
         }
 
+        /// <summary>
+        /// Siembra el historial de "Donaciones entregadas". Como son entregas que ya
+        /// pasaron y los víveres ya no están en bodega, cada una lleva su propia Entrega
+        /// Programada "Completada" con productos supuestos (no hace falta que existan
+        /// en el inventario actual): eso le da a cada fila su detalle de productos y su
+        /// comprobante en PDF, igual que a las entregas completadas desde la aplicación.
+        /// </summary>
         private static async Task SembrarEntregasAsync(ContextoViveres contexto, ILogger registrador)
         {
-            // Backfill: registros históricos sembrados antes de que "Donaciones entregadas"
-            // guardara detalle de productos y comprobante en PDF. Se completan con productos
-            // supuestos (ya no están en bodega, así que no hace falta que existan en el
-            // inventario actual) para que todas las filas terminen con su PDF.
-            var sinDetalle = await contexto.Entregas
-                .Where(e => e.EntregaProgramadaId == null)
-                .ToListAsync();
-
-            if (sinDetalle.Count > 0)
-            {
-                var programadasBackfill = new List<EntregaProgramada>();
-
-                foreach (var entrega in sinDetalle)
-                {
-                    var productos = GenerarProductosSupuestos();
-
-                    var entregaProgramada = new EntregaProgramada
-                    {
-                        Lugar = entrega.Lugar,
-                        Departamento = entrega.Departamento,
-                        Municipio = entrega.Municipio ?? string.Empty,
-                        FechaProgramada = entrega.FechaEntrega,
-                        FamiliasBeneficiadas = entrega.FamiliasBeneficiadas,
-                        Estado = EstadoEntregaProgramada.Completada,
-                        RegistradoPor = entrega.RegistradoPor,
-                        FechaRegistro = entrega.FechaRegistro,
-                        FechaCompletada = AFechaUtc(entrega.FechaEntrega),
-                        Detalles = productos.Select(p => new DetalleEntregaProgramada
-                        {
-                            Producto = p.Producto,
-                            SistemaMedida = p.Unidad,
-                            Total = p.Total
-                        }).ToList()
-                    };
-                    programadasBackfill.Add(entregaProgramada);
-
-                    entrega.EntregaProgramadaOrigen = entregaProgramada;
-                    entrega.TotalEntregado = productos.Sum(p => p.Total);
-                    entrega.Detalles = productos.Select(p => new DetalleEntrega
-                    {
-                        Producto = p.Producto,
-                        SistemaMedida = p.Unidad,
-                        Total = p.Total
-                    }).ToList();
-                }
-
-                contexto.EntregasProgramadas.AddRange(programadasBackfill);
-                await contexto.SaveChangesAsync();
-
-                registrador.LogInformation(
-                    "Se completó el detalle y comprobante de {Cantidad} donaciones entregadas antiguas.", sinDetalle.Count);
-            }
-
             var existentes = await contexto.Entregas.CountAsync();
             var faltantes = MetaEntregasSembradas - existentes;
 

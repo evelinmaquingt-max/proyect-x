@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControlViveresApp.Models
 {
     /// <summary>
     /// Un lugar de Guatemala al que ya se fue a dejar víveres.
-    /// Guarda latitud y longitud para poder dibujar el mapa más adelante.
     /// </summary>
     public class Entrega
     {
@@ -38,16 +35,6 @@ namespace ControlViveresApp.Models
         [Range(0, 1000000, ErrorMessage = "La cantidad debe estar entre 0 y 1000000")]
         [Display(Name = "Total de víveres entregados")]
         public int TotalEntregado { get; set; }
-
-        // Se llenan solas con el departamento elegido, pero se pueden ajustar a mano
-        // si algún día se quiere marcar la aldea exacta en el mapa.
-        [Range(-90, 90)]
-        [Display(Name = "Latitud")]
-        public double? Latitud { get; set; }
-
-        [Range(-180, 180)]
-        [Display(Name = "Longitud")]
-        public double? Longitud { get; set; }
 
         [StringLength(400, ErrorMessage = "Las observaciones no pueden pasar de 400 caracteres")]
         [Display(Name = "Observaciones")]
