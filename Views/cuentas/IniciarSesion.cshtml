@@ -18,23 +18,34 @@
 <body class="login-pagina">
     <div class="login-contenedor">
 
-        <!-- Lado izquierdo: marca -->
+        <!-- Lado izquierdo: marca y características -->
         <div class="login-marca">
-            <div class="login-emblema"><i class="bi bi-basket2-fill"></i></div>
-            <span class="login-eyebrow">Sistema comunitario de víveres</span>
             <h1>VÍVERES</h1>
-            <p>Gestión del inventario, pedidos y entregas de alimentos para comunidades que lo necesitan.</p>
+            <p>Gestión Integral del Inventario de Alimentos</p>
 
-            <div class="login-estadistica">
-                <strong>+50</strong>
-                <span>entregas ya registradas en el historial</span>
+            <div class="login-caracteristicas">
+                <div class="login-caracteristica">
+                    <i class="bi bi-shield-lock-fill"></i>
+                    <div>
+                        <strong>Seguro</strong>
+                        <span>Autenticación protegida por roles</span>
+                    </div>
+                </div>
+                <div class="login-caracteristica">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <div>
+                        <strong>Rápido</strong>
+                        <span>Gestión eficiente del inventario</span>
+                    </div>
+                </div>
+                <div class="login-caracteristica">
+                    <i class="bi bi-people-fill"></i>
+                    <div>
+                        <strong>Colaborativo</strong>
+                        <span>Trabajo en equipo</span>
+                    </div>
+                </div>
             </div>
-
-            <ul class="login-lista">
-                <li>Inventario con alertas de vencimiento</li>
-                <li>Entregas con comprobante en PDF</li>
-                <li>Abierto a toda la comunidad</li>
-            </ul>
         </div>
 
         <!-- Lado derecho: formulario -->
@@ -67,9 +78,6 @@
                 </button>
             </form>
 
-            <p class="login-credenciales">
-                ¿No tienes cuenta? <a asp-controller="Cuentas" asp-action="Registro" asp-route-urlRetorno="@ViewData["UrlRetorno"]">Crea una gratis</a>
-            </p>
         </div>
     </div>
 
