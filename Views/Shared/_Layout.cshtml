@@ -13,6 +13,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/envio-animado.css" asp-append-version="true" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Control de Víveres</title>
@@ -22,6 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <script src="~/js/envio-animado.js" asp-append-version="true"></script>
     <div class="app-shell">
 
         <!-- ===== MENÚ LATERAL ===== -->
@@ -34,7 +37,7 @@
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <nav class="sidebar-nav">
-                    <p class="sidebar-section">Control de Inventario</p>
+                    <p class="sidebar-section">Menú</p>
 
                     <a asp-controller="Alimentos" asp-action="Index" class="sidebar-link @ActivoAccion("Alimentos", "Index")">
                         <i class="bi bi-grid-fill"></i> <span>Inventario</span>
@@ -44,13 +47,9 @@
                         <i class="bi bi-boxes"></i> <span>Productos Separados</span>
                     </a>
 
-                    <p class="sidebar-section sidebar-section-aparte">Pedidos</p>
-
                     <a asp-controller="Pedidos" asp-action="Index" class="sidebar-link @Activo("Pedidos")">
                         <i class="bi bi-cart-plus-fill"></i> <span>Pedidos por realizar</span>
                     </a>
-
-                    <p class="sidebar-section sidebar-section-aparte">Entregas</p>
 
                     <a asp-controller="VisitasPrevias" asp-action="Index" class="sidebar-link @Activo("VisitasPrevias")">
                         <i class="bi bi-clipboard-check"></i> <span>Revisión Previa</span>
@@ -62,16 +61,6 @@
 
                     <a asp-controller="Entregas" asp-action="Index" class="sidebar-link @Activo("Entregas")">
                         <i class="bi bi-gift-fill"></i> <span>Donaciones entregadas</span>
-                    </a>
-
-                    <p class="sidebar-section sidebar-section-aparte">Análisis</p>
-
-                    <a asp-controller="Visualizacion" asp-action="Index" class="sidebar-link @Activo("Visualizacion")">
-                        <i class="bi bi-bar-chart-line-fill"></i> <span>Visualización</span>
-                    </a>
-
-                    <a asp-controller="Pobreza" asp-action="Index" class="sidebar-link @Activo("Pobreza")">
-                        <i class="bi bi-geo-alt-fill"></i> <span>Pobreza en Guatemala</span>
                     </a>
                 </nav>
 
